@@ -25,8 +25,9 @@ sceintistHolder.forEach(function(i) {
 });
 function dotBorder(event) {
     global = event.currentTarget;
-    event.currentTarget.classList.toggle("coolBorder");
-    event.currentTarget.childNodes[1].childNodes[0].classList.toggle("writeHere");
+    global.classList.toggle("coolBorder");
+
+    global.childNodes[1].childNodes[0].classList.add("writeHere");
     inputTarget.focus();
 }
 inputTarget.addEventListener("keyup", writeBio)
@@ -35,12 +36,16 @@ function writeBio() {
     for(var x = 0; x < writeHereClasses.length; x++) {
         writeHereClasses[x].innerHTML = inputTarget.value;
     }
+
 }
 inputTarget.addEventListener("keypress", looseFocus);
 function looseFocus() {
     if (event.keyCode == 13) {
-        var holder = document.getElementsByClassName('holder');
-        global.classList.toggle("coolBorder");
-        inputTarget.value = "";
+        global.classList.remove("coolBorder");
+        var bioer = document.getElementsByClassName('bio');
+        for(var y = 0; y < bioer.length; y++) {
+        bioer[y].classList.remove("writeHere");
         }
+    inputTarget.value = "";
+    }
 }
